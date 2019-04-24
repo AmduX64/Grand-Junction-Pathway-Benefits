@@ -1,0 +1,51 @@
+# CAMBRIDGE GRAND JUNCTION - MAPC's routing scenario engines  
+#### using and extending [Graphhopper routing engine](https://github.com/graphhopper/graphhopper)
+
+Graphhopper's repository was mirrored on version 0.12 to the folder `graphhopper'-- merging the Grapphopper's most recent updates should be possible, however needs to be done with care.
+
+MAPC's additions include:
+- MAPC's extented the code base for two additional cycling profiles,
+- MAPC added the features for returning additional details of the routes in results, including detailed information regarding the facilities, such as surface, class, etc.
+- In additional, the web module is altered to include MAPC's logo+information about the project.
+- Two experimental modules
+	1. viz is develped with Vue.js for visualizing route's weights in order to understand how the routing engine works (how the engine sees the world)
+	2. routingagent: developed with Java, in order to get an understanding of steps the engine takes for being able to look up a closest node, and eventually to calculate a path.
+
+
+## run the four scenarios with docker-compose
+
+This project needs to launch four graphhopper routing engine instances that each are built ysung an incrementally different version of the osm street network (for different scenarios). This could be done via servung to different ports:
+- base scenario: port 8989
+- scenario 1- only grand junction bike path is added: port 7979
+- scenario 2- cambridge cycling vision added: port 6969
+- scenario 3- regional cycling network vision is added: port 5959 
+-- _Note: nginx web server is used as a reverse proxy to map the ports to 8000 to 8003 on MAPC's `ds-geoserver` which was used to run the analysis.
+
+
+
+## setup for development
+
+
+The easiest way to setup a development environment for Graphhopper is their own suggestion which could be found [here](https://github.com/graphhopper/graphhopper/blob/master/docs/core/quickstart-from-source.md#start-development) and is using IntelliJ IDEA-- this needs a licence, but is free if you set up a educational account with university email, or buy a licence) but it's also possible with NetBeans, Eclipse etc.
+
+
+
+## running a stand alone routing engine with the two profiles  
+
+Make sure  jdk8 is installed and working-- using `latest.osm.obf` as the osm extract we want to use as street network:   
+
+```export JAVA_OPTS="-Xmx2g -Xms2g"```
+
+to build a routable graph in saving into a folder: `./latest.osm-gh `:  
+
+```
+./graphhopper.sh -a import -i ./latest.osm.pbf -o ./latest.osm-gh 
+
+```
+
+run the routing engine with:
+
+```
+./graphhopper.sh -a web -i ./latest.osm.pbf -o ./latest.osm-gh
+
+```

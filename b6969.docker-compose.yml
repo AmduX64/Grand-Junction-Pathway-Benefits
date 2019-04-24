@@ -1,0 +1,49 @@
+version: '3.4'
+services:
+  graphhopper:
+    # build: ./graphhopper
+    image: arminakvn/graphhopperlit:6969
+    volumes:
+      - /data
+      - /conf
+      - /webapp
+
+    ports:
+      - "6969:6969"
+      - "6970"
+    expose: 
+      - "6969"
+    # net: host
+    # networks:
+    #   mapcridernet:
+    #     aliases:
+    #       - graphhopper
+
+    # network_mode: "host"
+      # -server -Dgraphhopper.datareader.file=
+    # command: java -jar graphhopper.jar jetty.resourcebase=webapp datareader.file=data/latest.osm.pbf config=conf/mapcrider.properties
+    # command: java -jar graphhopper-web.jar server -Xmx4g -Xms4g -Dgraphhopper.graph.flag_encoders=mapcrider -Dgraphhopper.datareader.file=latest.osm.pbf -Dgraphhopper.graph.location=latest.osm-gh
+    # command: "java -Dgraphhopper.datareader.file=latest.osm.pbf -jar graphhopper-web.jar server config.yml"
+    command: "./graphhopper.sh -a web -i ./latest.osm.pbf -o ./latest.osm-gh --port 6969"
+    working_dir: /graphhopper
+    deploy:
+      # placement:
+      #   constraints:
+      #     - node.labels.endpoint==gateway
+      replicas: 1
+      resources:
+        limits:
+          cpus: '80'
+        reservations:
+          # cpus: '4'
+          memory: 4G
+      update_config:
+        parallelism: 0
+        delay: 5s
+        failure_action: pause #continue #
+      restart_policy:
+        condition: none #on-failure #none
+        delay: 40s
+        max_attempts: 20
+        window: 30s
+  

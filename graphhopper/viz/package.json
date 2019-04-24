@@ -1,0 +1,21 @@
+{
+  "name": "viz",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue serve src/main.js",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "latest",
+    "@vue/cli-plugin-eslint": "latest",
+    "@vue/cli-service": "latest",
+    "vue-router": "^3.0.2",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "dependencies": {
+    "d3": "^5.7.0",
+    "mapbox-gl": "^0.52.0"
+  }
+}
