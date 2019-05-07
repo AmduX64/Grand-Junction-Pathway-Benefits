@@ -1,0 +1,101 @@
+upstream routingengine0 {
+        server 127.0.0.1:8989;
+
+    }
+upstream routingengine1 {
+        least_conn;
+        server 127.0.0.1:7979;
+
+}
+upstream routingengine2 {
+        server 127.0.0.1:6969;
+}
+
+upstream routingengine3 {
+        server 127.0.0.1:5959;
+
+}
+server {
+        listen 8000 default_server;
+        listen [::]:8000 default_server;
+        location / {
+            proxy_pass http://routingengine0;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+    }
+server {
+        listen 9000 default_server;
+        listen [::]:9000 default_server;
+        location / {
+            root /var/www/dist0;
+            index index.html;
+        }
+    }
+
+
+
+
+server {
+        listen 8001 default_server;
+        listen [::]:8001 default_server;
+        location / {
+            proxy_pass http://routingengine1;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+    }
+server {
+        listen 8002 default_server;
+        listen [::]:8002 default_server;
+        location / {
+            proxy_pass http://routingengine2;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+    }
+
+server {
+        listen 9002 default_server;
+        listen [::]:9002 default_server;
+
+        location / {
+            root /var/www/dist0;
+            index index.html;
+        }
+    }
+
+
+
+server {
+        listen 8003 default_server;
+        listen [::]:8003 default_server;
+        location / {
+
+            proxy_pass http://routingengine3;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+    }
+}
+
+server {
+        listen 9003 default_server;
+        listen [::]:9003 default_server;
+
+        location / {
+            root /var/www/dist3;
+            index index.html;
+        }
+    }
