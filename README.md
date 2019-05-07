@@ -15,16 +15,17 @@ The process of performing the analysis included the following components:
 ![modeling diagram](d1.png)
 
 
+### routing engine
 #### using and extending [Graphhopper routing engine](https://github.com/graphhopper/graphhopper)
 
-Graphhopper's repository was mirrored on version 0.12 to the folder `graphhopper'-- merging the Grapphopper's most recent updates should be possible, however needs to be done with care.
+Graphhopper's repository was mirrored on version 0.12 to the folder `graphhopper'.
 
-MAPC's additions include:
-- MAPC's extented the code base for two additional cycling profiles,
-- MAPC added the features for returning additional details of the routes in results, including detailed information regarding the facilities, such as surface, class, etc.
+MAPC's changes to the Graphhopper's base code included:
+- following the Graphhopper's developer's guidelines for [creating a new routing profile](https://github.com/graphhopper/graphhopper/blob/master/docs/core/create-new-flagencoder.md), MAPC extented the code base for an additional cycling profiles. The added profile: `mapcrider2`, which combines `bike2`, Graphhopper's biking profile that counts for elevation in rouing, and `racingbike` profiles with additional priorities such as prefaring _track_, _cycle track_ and _cycleway_ road classes (highway tags) over _trunk_, _primary_, secondary_, and _residential_ road classes, avoiding roads without a cycling lane, prefering streets with lower max-speed, and prefering routes that are part of local or regional cycling network.
+- MAPC added the features for returning additional details of the routes, including surface types and stress level (stress_level tag is added to the OSM data by MAPC)
 - In additional, the web module is altered to include MAPC's logo+information about the project.
 
-## run the four scenarios with docker-compose
+## run the four scenario routing engines with docker-compose 
 
 This project needs to launch four graphhopper routing engine instances that each are built ysung an incrementally different version of the osm street network (for different scenarios). This could be done via servung to different ports:
 - base scenario: port 8989
