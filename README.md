@@ -49,7 +49,7 @@ The easiest way to setup a development environment for Graphhopper is their own 
 
 ## running a stand alone routing engine with the two profiles  
 
-Make sure  jdk8 is installed and working-- using `latest.osm.obf` as the osm extract we want to use as street network:   
+Make sure  jdk8 is installed and working-- `latest.osm.obf` is the OSM data extract used for the base scenario (downloaded from OpenStreetMap Jan 2019).   
 
 ```export JAVA_OPTS="-Xmx2g -Xms2g"```
 
