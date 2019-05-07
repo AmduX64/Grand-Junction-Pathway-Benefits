@@ -23,10 +23,6 @@ MAPC's additions include:
 - MAPC's extented the code base for two additional cycling profiles,
 - MAPC added the features for returning additional details of the routes in results, including detailed information regarding the facilities, such as surface, class, etc.
 - In additional, the web module is altered to include MAPC's logo+information about the project.
-- Two experimental modules
-	1. viz is develped with Vue.js for visualizing route's weights in order to understand how the routing engine works (how the engine sees the world)
-	2. routingagent: developed with Java, in order to get an understanding of steps the engine takes for being able to look up a closest node, and eventually to calculate a path.
-
 
 ## run the four scenarios with docker-compose
 
