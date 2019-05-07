@@ -4,15 +4,19 @@
 ### large scale data trip/route modeling setup and infrastructure 
 The basic idea is to use a routing engine to model a very large number of routes/trips (block to block)-- 
 Alternative future scenarios are made via editing the street network data before using it as the input dataset of the routing engine, and running again for the same routes/trips (block to block).
-The process of performing the analysis included the following components:
+Running the complete process included the following components:
 - OpenStreetMaps data extracted as a *.osm.pbf files for a given geography.
 - Graphhopper, an open-source navigation, and routing engine (extended with additional functionalities and customized vehicle types)
 - JOSM, an open-source and cross-platforn application for editing the OSM data.
+- scripting plugin for running scripts in JOSM (needs to be installed in JOSM)
 - Docker technology for containerization.
 - Docker Swarm for running a computing cluster (4 servers--nodes, with culmatvely 50 cpus, 140 GB ram, and 1 TB of diskspace)
 - Postgres database for storing, querying, retriving data.
 - NGINX web server, for reverse proxy, load ballancing.
 ![modeling diagram](d1.png)
+
+### JOSM scripting
+MAPC processed the OpenStreetMap datafiles, and for 'type:way' added tags for 'stress_level:high' vs. 'stress_level:low' based on a set of conditions, modifying the methodoly used in the Bicycle Network Analysis by [PeapleForBikes](https://bna.peopleforbikes.org/#/methodology). The `josm_script_stress_lev.js` is used in JOSM's _scripting plugin_, and each OSM file was processed before building the rouging engine (graphhopper) in each scenario.
 
 
 ### routing engine
