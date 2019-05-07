@@ -1,9 +1,17 @@
 # CAMBRIDGE GRAND JUNCTION - MAPC's routing scenario engines  
 
 
-### idea
-Basic idea is to use a routing engine to model routes--
-Alternative future scenarios are made via editing the street network data before using it as the input dataset of the routing engine.
+### large scale data trip/route modeling setup and infrastructure 
+The basic idea is to use a routing engine to model a very large number of routes/trips (block to block)-- 
+Alternative future scenarios are made via editing the street network data before using it as the input dataset of the routing engine, and running again for the same routes/trips (block to block).
+The process of performing the analysis included the following components:
+- OpenStreetMaps data extracted as a *.osm.pbf files for a given geography.
+- Graphhopper, an open-source navigation, and routing engine (extended with additional functionalities and customized vehicle types)
+- JOSM, an open-source and cross-platforn application for editing the OSM data.
+- Docker technology for containerization.
+- Docker Swarm for running a computing cluster (4 servers--nodes, with culmatvely 50 cpus, 140 GB ram, and 1 TB of diskspace)
+- Postgres database for storing, querying, retriving data.
+- NGINX web server, for reverse proxy, load ballancing.
 ![modeling diagram](d1.png)
 
 
