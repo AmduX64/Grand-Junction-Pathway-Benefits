@@ -1,4 +1,12 @@
 # CAMBRIDGE GRAND JUNCTION - MAPC's routing scenario engines  
+
+
+### idea
+Basic idea is to use a routing engine to model routes--
+Alternative future scenarios are made via editing the street network data before using it as the input dataset of the routing engine.
+![modeling diagram](d1.png)
+
+
 #### using and extending [Graphhopper routing engine](https://github.com/graphhopper/graphhopper)
 
 Graphhopper's repository was mirrored on version 0.12 to the folder `graphhopper'-- merging the Grapphopper's most recent updates should be possible, however needs to be done with care.
