@@ -15,8 +15,11 @@ Running the complete process included the following components:
 - NGINX web server, for reverse proxy, load ballancing.
 ![modeling diagram](d1.png)
 
-### JOSM scripting
+### tagging high/low stress roads with JOSM scripting
 MAPC processed the OpenStreetMap datafiles, and for 'type:way' added tags for 'stress_level:high' vs. 'stress_level:low' based on a set of conditions, modifying the methodoly used in the Bicycle Network Analysis by [PeapleForBikes](https://bna.peopleforbikes.org/#/methodology). The `josm_script_stress_lev.js` is used in JOSM's _scripting plugin_, and each OSM file was processed before building the rouging engine (graphhopper) in each scenario.
+![stress map](stress_map.png)
+
+
 
 
 ### routing engine
@@ -29,21 +32,22 @@ MAPC's changes to the Graphhopper's base code included:
 - MAPC added the features for returning additional details of the routes, including surface types and stress level (stress_level tag is added to the OSM data by MAPC)
 - In additional, the web module is altered to include MAPC's logo+information about the project.
 
+Graphhopper provides excellent documentation on extending the engine (here)[https://github.com/graphhopper/graphhopper/blob/master/docs/core/low-level-api.md].
 ## run the four scenario routing engines with docker-compose 
 
-This project needs to launch four graphhopper routing engine instances that each are built using an incrementally different version of the osm street network (for different scenarios). This could be done via servung to different ports:
+This project needs to launch four graphhopper routing engine instances that each are built using an incrementally different version of the osm street network (for different scenarios). Each scenario, served as it's own instance of Graphhopper's routing webserver exposes a different port as follows:
 - base scenario: port 8989
 - scenario 1- only grand junction bike path is added: port 7979
 - scenario 2- cambridge cycling vision added: port 6969
 - scenario 3- regional cycling network vision is added: port 5959 
--- _Note: nginx web server is used as a reverse proxy to map the ports to 8000 to 8003 on MAPC's `ds-geoserver` which was used to run the analysis.
+__Note__: When running the complete analysis, an NGINX web server is used as a reverse proxy to map the ports exposed by the routing engine from swarm's network overlay to ports 8000-8003 on MAPC's internal network.
 
 
 
 ## setup for development
 
 
-The easiest way to setup a development environment for Graphhopper is their own suggestion which could be found [here](https://github.com/graphhopper/graphhopper/blob/master/docs/core/quickstart-from-source.md#start-development) and is using IntelliJ IDEA-- this needs a licence, but is free if you set up a educational account with university email, or buy a licence) but it's also possible with NetBeans, Eclipse etc.
+The easiest way to setup a development environment for Graphhopper is their own suggestion which could be found [here](https://github.com/graphhopper/graphhopper/blob/master/docs/core/quickstart-from-source.md#start-development) and is using IntelliJ IDEA-- this needs a licence, but is free if you set up a educational account with university email, or buy a licence) but it's also possible to set up the development environment with NetBeans, Eclipse etc. (Graphhopper source repository has instruction for each setup process).
 
 
 
@@ -66,3 +70,5 @@ run the routing engine with:
 ./graphhopper.sh -a web -i ./latest.osm.pbf -o ./latest.osm-gh
 
 ```
+
+
