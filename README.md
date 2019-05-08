@@ -45,6 +45,11 @@ This project needs to launch four graphhopper routing engine instances that each
 - scenario 3- regional cycling network vision is added: port 5959 
 __Note__: When running the complete analysis, an NGINX web server is used as a reverse proxy to map the ports exposed by the routing engine from swarm's network overlay to ports 8000-8003 on MAPC's internal network.
 
+MAPC build each scenario's routing engine into a docker image. Each scenario runs via using the *.docker-compose.yml file for that scenario. Make sure you are in the root folder of the repository and run each scenario with:
+- for base scenario: `docker-compose -f p8989.docker-compose.yml up -d`
+- first scenario (grand junction only): `docker-compose -f b7979.docker-compose.yml up -d`
+- second scenario (Cambridge vision): `docker-compose -f b6969.docker-compose.yml up -d`
+- third scenario (regional network vision): `docker-compose -f b5959.docker-compose.yml up -d`
 
 
 ## setup for development
@@ -60,7 +65,7 @@ Make sure  jdk8 is installed and working-- `latest.osm.obf` is the OSM data extr
 
 ```export JAVA_OPTS="-Xmx2g -Xms2g"```
 
-to build a routable graph in saving into a folder: `./latest.osm-gh `:  
+to build a routable graph -- store into a folder: `./latest.osm-gh `:  
 
 ```
 ./graphhopper.sh -a import -i ./latest.osm.pbf -o ./latest.osm-gh 
@@ -73,5 +78,8 @@ run the routing engine with:
 ./graphhopper.sh -a web -i ./latest.osm.pbf -o ./latest.osm-gh
 
 ```
+
+
+
 
 
