@@ -29,7 +29,10 @@ Graphhopper's repository was mirrored on version 0.12 to the folder `graphhopper
 
 MAPC's changes to the Graphhopper's base code included:
 - following the Graphhopper's developer's guidelines for [creating a new routing profile](https://github.com/graphhopper/graphhopper/blob/master/docs/core/create-new-flagencoder.md), MAPC extended the code base for an additional cycling profiles. The added profile: `mapcrider2`, which combines `bike2`, Graphhopper's biking profile that counts for elevation in routing, and `racingbike` profiles with additional priorities such as preferring _track_, _cycle track_ and _cycleway_ road classes (highway tags) over _trunk_, _primary_, _secondary_, and _residential_ road classes, avoiding roads without a cycling lane, preferring streets with lower max-speed, and preferring routes that are part of local or regional cycling network.
-- MAPC added the features for returning additional details of the routes, including surface types and stress level (stress_level tag is added to the OSM data by MAPC)
+- MAPC implemented some of the path details modules, which currently are available only in enterperise version of the Graphhopper (not free/open source) for returning additional details of the path, including surface types and stress level (stress_level tag is added to the OSM data by MAPC)
+![details](details.png)
+
+
 - In additional, the web module is altered to include MAPC's logo+information about the project.
 
 Graphhopper provides excellent documentation on extending the engine (here)[https://github.com/graphhopper/graphhopper/blob/master/docs/core/low-level-api.md].
