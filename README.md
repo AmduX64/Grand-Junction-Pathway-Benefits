@@ -45,7 +45,7 @@ This project needs to launch four graphhopper routing engine instances that each
 - scenario 3- regional cycling network vision is added: port 5959 
 __Note__: When running the complete analysis, an NGINX web server is used as a reverse proxy to map the ports exposed by the routing engine from swarm's network overlay to ports 8000-8003 on MAPC's internal network.
 
-MAPC build each scenario's routing engine into a docker image. Each scenario runs via using the *.docker-compose.yml file for that scenario. Make sure you are in the root folder of the repository and run each scenario with:
+MAPC build each scenario's routing engine into a docker image. Each scenario runs via using the *.docker-compose.yml file for that scenario. Make sure you have Docker and docker-compose installed on your machine, and you are in the root folder of the repository and run each scenario with:
 - for base scenario: `docker-compose -f p8989.docker-compose.yml up -d`
 - first scenario (grand junction only): `docker-compose -f b7979.docker-compose.yml up -d`
 - second scenario (Cambridge vision): `docker-compose -f b6969.docker-compose.yml up -d`
