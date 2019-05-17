@@ -65,6 +65,8 @@ check the status of the running services with:
 ```
 docker service ls
 ```
+for stopping the service you could remove the deployments for example for base scenario (p8989) with:
+`docker stack rm p8989`
 
 
 ## setup for development
