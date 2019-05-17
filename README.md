@@ -45,11 +45,23 @@ This project needs to launch four graphhopper routing engine instances that each
 - scenario 3- regional cycling network vision is added: port 5959 
 __Note__: When running the complete analysis, an NGINX web server is used as a reverse proxy to map the ports exposed by the routing engine from swarm's network overlay to ports 8000-8003 on MAPC's internal network.
 
-MAPC build each scenario's routing engine into a docker image. Each scenario runs via using the *.docker-compose.yml file for that scenario. Make sure you have Docker and docker-compose installed on your machine, and you are in the root folder of the repository and run each scenario with:
-- for base scenario: `docker-compose -f p8989.docker-compose.yml up -d`
-- first scenario (grand junction only): `docker-compose -f b7979.docker-compose.yml up -d`
-- second scenario (Cambridge vision): `docker-compose -f b6969.docker-compose.yml up -d`
-- third scenario (regional network vision): `docker-compose -f b5959.docker-compose.yml up -d`
+MAPC build each scenario's routing engine into a docker image. Each scenario runs via using the *.docker-compose.yml file for that scenario. Make sure you have Docker and docker-compose installed on your machine, and you are in the root folder of the repository and run each scenario with:     
+first initialize docker swarm (only once needed):    
+```
+docker swarm init
+```
+It's safer to first pull the images in a seperate step:
+- `docker pull arminakvn/graphhopperlit:8989`
+- `docker pull arminakvn/graphhopperlit:7979`
+- `docker pull arminakvn/graphhopperlit:6969`
+- `docker pull arminakvn/graphhopperlit:5959`    
+then run the engines as services using the stack deploy by running:  
+- for base scenario: `docker stack deploy -c p8989.docker-compose.yml p8989`
+- first scenario (grand junction only): `docker stack deploy -c b7979.docker-compose.yml b7979`
+- second scenario (Cambridge vision): `docker stack deploy -c b6969.docker-compose.yml b6969`
+- third scenario (regional network vision): `docker stack deploy -c b5959.docker-compose.yml b5959`
+
+check the status of the running services with:
 
 
 ## setup for development

@@ -31,12 +31,12 @@ services:
       #   constraints:
       #     - node.labels.endpoint==gateway
       replicas: 1
-      resources:
-        limits:
-          cpus: '80'
-        reservations:
-          # cpus: '4'
-          memory: 4G
+      # resources:
+      #   limits:
+      #     cpus: '80'
+      #   reservations:
+      #     # cpus: '4'
+      #     memory: 4G
       update_config:
         parallelism: 0
         delay: 5s
