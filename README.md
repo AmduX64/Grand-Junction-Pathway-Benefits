@@ -62,6 +62,9 @@ then run the engines as services using the stack deploy by running:
 - third scenario (regional network vision): `docker stack deploy -c b5959.docker-compose.yml b5959`
 
 check the status of the running services with:
+```
+docker service ls
+```
 
 
 ## setup for development
